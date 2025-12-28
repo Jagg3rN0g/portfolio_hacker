@@ -1,30 +1,63 @@
 ---
-import { Award, ShieldCheck } from "lucide-react";
+import { Shield, ShieldCheck, ShieldAlert, ExternalLink } from "lucide-react";
 
 const certifications = [
     {
-        name: "OSCP",
-        issuer: "OffSec",
-        date: "2024",
-        id: "OS-XXXXX",
+        id: "oscp",
+        title: "OSCP",
+        issuer: "Offensive Security",
+        date: "2026-02-01",
+        status: "in-progress",
+        backgroundUrl: "/images/certs/oscp.png",
     },
     {
-        name: "eJPT",
-        issuer: "eLearnSecurity",
-        date: "2023",
-        id: "EJP-XXXXX",
+        id: "ejpt",
+        title: "eJPT – eLearnSecurity Junior Penetration Tester",
+        issuer: "INE Security (eLearnSecurity)",
+        date: "2025-09-23",
+        verifyUrl:
+            "https://certs.ine.com/0a950751-33f1-4243-ac07-1024b10d7cc1#acc.htT2o951",
+        status: "verified",
+        backgroundUrl: "/images/certs/ejpt.png",
     },
     {
-        name: "CompTIA Security+",
-        issuer: "CompTIA",
-        date: "2022",
-        id: "COMP-XXXXX",
+        id: "solid",
+        title: "SOLID Principles & Clean Code",
+        issuer: "Fernando Herrera",
+        date: "2025-09-23",
+        status: "verified",
+        verifyUrl:
+            "https://udemy-certificate.s3.amazonaws.com/image/UC-11c43a9f-d086-485f-b755-fd00b5ed543e.jpg",
+        backgroundUrl: "/images/certs/solid.png",
     },
     {
-        name: "CEH Practical",
-        issuer: "EC-Council",
-        date: "2023",
-        id: "ECC-XXXXX",
+        id: "utn-ethical-hacking-2025",
+        title: "Experto Universitario en Ethical Hacking",
+        issuer: "Universidad Tecnológica Nacional (UTN)",
+        date: "2025-09-19",
+        status: "verified",
+        note: "Calificación: Excelente",
+        verifyUrl:
+            "https://validator.centrodeelearning.com/validator/40cd67f6-2070-4d46-beaf-52c5ad150842",
+        backgroundUrl: "/images/certs/utn-hacking.png",
+    },
+    {
+        id: "utn-linux",
+        title: "Administrador de Sistemas Linux",
+        issuer: "Universidad Tecnológica Nacional (UTN)",
+        date: "2025-06-15",
+        status: "verified",
+        backgroundUrl: "/images/certs/utn-linux.png",
+    },
+    {
+        id: "ecppt",
+        title: "Certified Professional Penetration Tester",
+        issuer: "INE Security (eLearnSecurity)",
+        date: "2025-12-16",
+        status: "verified",
+        verifyUrl:
+            "https://certs.ine.com/cf4e7d98-d4bd-4a19-a630-46001d1ff2ab#acc.hvU0RTAe",
+        backgroundUrl: "/images/certs/hackmetrix.png",
     },
 ];
 ---
@@ -37,21 +70,59 @@ const certifications = [
         <div class="h-px bg-gray-800 flex-1 mb-2"></div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {
             certifications.map((cert) => (
-                <div class="border border-gray-800 bg-gray-900/30 p-4 transition-all hover:bg-white/5 hover:border-white/20 group">
-                    <div class="flex items-center gap-3 mb-2">
-                        <ShieldCheck className="w-6 h-6 text-gray-600 group-hover:text-accent-red transition-colors" />
-                        <h3 class="font-bold text-lg text-gray-200">
-                            {cert.name}
-                        </h3>
+                <div class="relative border border-gray-800 bg-gray-900/30 p-5 transition-all hover:bg-white/5 hover:border-white/20 group flex flex-col h-full overflow-hidden">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="p-2 bg-black/50 rounded-lg border border-gray-800 group-hover:border-gray-600 transition-colors">
+                            {cert.status === "verified" ? (
+                                <ShieldCheck className="w-8 h-8 text-green-500/80" />
+                            ) : (
+                                <ShieldAlert className="w-8 h-8 text-yellow-500/80" />
+                            )}
+                        </div>
+                        {cert.verifyUrl && (
+                            <a
+                                href={cert.verifyUrl}
+                                target="_blank"
+                                class="text-gray-500 hover:text-accent-red transition-colors"
+                                title="Verify Certificate"
+                            >
+                                <ExternalLink className="w-5 h-5" />
+                            </a>
+                        )}
                     </div>
-                    <div class="text-sm text-gray-500">
-                        <p>{cert.issuer}</p>
-                        <p class="text-xs mt-1 opacity-60">
-                            {cert.date} | ID: {cert.id}
-                        </p>
+
+                    <div class="mb-4">
+                        <h3 class="font-bold text-lg text-gray-200 leading-tight mb-1 group-hover:text-white transition-colors">
+                            {cert.title}
+                        </h3>
+                        <p class="text-sm text-accent-red">{cert.issuer}</p>
+                    </div>
+
+                    <div class="mt-auto pt-4 border-t border-gray-800/50 flex flex-col gap-1 text-xs text-gray-500 font-mono">
+                        <div class="flex justify-between">
+                            <span>DATE:</span>
+                            <span class="text-gray-400">{cert.date}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>STATUS:</span>
+                            <span
+                                class={
+                                    cert.status === "verified"
+                                        ? "text-green-500/70"
+                                        : "text-yellow-500/70"
+                                }
+                            >
+                                [{cert.status.toUpperCase()}]
+                            </span>
+                        </div>
+                        {cert.note && (
+                            <div class="mt-1 text-gray-400 italic">
+                                "{cert.note}"
+                            </div>
+                        )}
                     </div>
                 </div>
             ))

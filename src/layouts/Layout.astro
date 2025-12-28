@@ -1,9 +1,9 @@
 ---
-import '@fontsource/courier-prime';
-import '../styles/global.css';
+import "@fontsource/courier-prime";
+import "../styles/global.css";
 
 interface Props {
-	title: string;
+    title: string;
 }
 
 const { title } = Astro.props;
@@ -11,43 +11,78 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Penetration Tester Portfolio" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body class="bg-black text-off-white font-mono antialiased selection:bg-accent-red selection:text-white">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Penetration Tester Portfolio" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+    </head>
+    <body
+        class="bg-black text-off-white font-mono antialiased selection:bg-accent-red selection:text-white"
+    >
         <!-- Terminal-style Sticky Header -->
-        <header class="sticky top-0 z-50 w-full bg-black/90 border-b border-white/20 backdrop-blur-sm">
-            <div class="max-w-4xl mx-auto px-4 h-10 flex items-center justify-between text-xs md:text-sm text-gray-400">
+        <header
+            class="sticky top-0 z-50 w-full bg-black/90 border-b border-white/20 backdrop-blur-sm"
+        >
+            <div
+                class="max-w-4xl mx-auto px-4 h-10 flex items-center justify-between text-xs md:text-sm text-gray-400"
+            >
                 <div class="flex items-center gap-2">
                     <span class="text-accent-red">root@fsociety:~#</span>
-                    <span class="hidden sm:inline">./user_profile.sh</span>
+                    <span class="hidden sm:inline">./about_jagg3r.sh</span>
                 </div>
                 <div class="flex gap-4">
-                     <!-- Minimal navigation could go here, or just status indicators -->
-                     <span>UNKOWN_USER</span>
-                     <span>[SECURE]</span>
+                    <!-- Minimal navigation could go here, or just status indicators -->
+                    <span>UNKOWN_USER</span>
+                    <!-- <span>[SECURE]</span> -->
                 </div>
             </div>
         </header>
 
-		<slot />
+        <slot />
 
         <script>
             // Easter Egg
             const asciiArt = `
-             __
-            /  \\
-           |  o |
-           |  _ |
-            \\__/
+                                __....__
+                        :._  .-:::::::::" .:
+                        '::""::::::::::::::'
+                      .-""":::_:::::::::::'/;
+                     .:-._.::| ""-::::;'|:;/.--.
+                   .:::::::-"'-._o.--.o-': . ':::.
+               _.=::::::"  .-":  ":..::   .   ::::.
+             -:::::::::|    .(     'T'  -._.  ::::::.
+            -:::::::/::'      |T--"""""--:|  .:::::::::.
+     ...    .:::::'.::|       ':         :'  ::''':::::;.
+     ':::. .:::::' :::'                     :'     "::::;
+        :: ::::'   ::|                     .:        ::::.
+ .:::::. :::::'    ::|                     :'        '::::
+:::':::::::::' ... ::|               __.' .:          ':::.     ..:::.
+ '    "::::::::::' :::.            ""     :'           ':::   .:::::''
+        ':''::''   '::|                  .:            .:::..::::..
+                    ::|                 .:            .:::::''':::::.
+                    ::|                .:         ':::::''       '''
+                    ::|               .:'           '''
+                    :::.            .:'
+                   .:::|          .::'
+                   ::::|        .::::.
+               ._.::::::.    ..:::::::.
+               '::::::::::'''':::::::::
+                 '':::::'      ':::::::.
+                 .::::'          ::::::'
+                 '':::.         .::::'
+            ....    ':::.      .:::'     ....
+           ::::::::::::::'    '::::::::::::::::.
+           '::::::::::'''       '''''':::::::::'
+           by grp'''                           ''
             `;
-            console.log(`%c${asciiArt}`, 'color: #b91c1c; font-weight: bold;');
-            console.log('%cStop looking at my code. Go break something else.', 'color: #b91c1c; font-size: 16px; font-weight: bold;');
+            console.log(`%c${asciiArt}`, "color: #b91c1c; font-weight: bold;");
+            console.log(
+                "%cStop looking at my code. Go break something else curious george.",
+                "color: #b91c1c; font-size: 16px; font-weight: bold;",
+            );
         </script>
-	</body>
+    </body>
 </html>
