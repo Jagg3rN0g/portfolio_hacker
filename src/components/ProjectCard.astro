@@ -1,0 +1,54 @@
+---
+import { Star, Terminal } from "lucide-react";
+
+interface Props {
+    title: string;
+    description: string;
+    tags: string[];
+    stars: number;
+    url: string;
+}
+
+const { title, description, tags, stars, url } = Astro.props;
+---
+
+<a href={url} target="_blank" class="block group">
+    <div
+        class="h-full border border-gray-800 bg-black/50 p-6 hover:border-accent-red transition-colors duration-300 relative overflow-hidden"
+    >
+        <!-- Terminal Header Strip -->
+        <div
+            class="absolute top-0 left-0 w-full h-1 bg-gray-800 group-hover:bg-accent-red transition-colors duration-300"
+        >
+        </div>
+
+        <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center gap-2 text-white">
+                <Terminal className="w-5 h-5 text-accent-red" />
+                <h3
+                    class="text-xl font-bold group-hover:text-accent-red transition-colors"
+                >
+                    {title}
+                </h3>
+            </div>
+            <div class="flex items-center gap-1 text-gray-500 text-sm">
+                <Star className="w-4 h-4" />
+                <span>{stars}</span>
+            </div>
+        </div>
+
+        <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+            {description}
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-auto">
+            {
+                tags.map((tag) => (
+                    <span class="text-xs px-2 py-1 border border-gray-800 text-gray-500 group-hover:border-gray-600 transition-colors">
+                        {tag}
+                    </span>
+                ))
+            }
+        </div>
+    </div>
+</a>

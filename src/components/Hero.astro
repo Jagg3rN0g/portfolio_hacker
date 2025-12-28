@@ -1,0 +1,122 @@
+---
+import { Github, Linkedin, Mail } from "lucide-react";
+---
+
+<section
+    class="min-h-[80vh] flex flex-col justify-center max-w-4xl mx-auto px-4"
+>
+    <div class="space-y-6">
+        <p
+            class="text-xl md:text-2xl text-gray-500 font-bold typing-effect w-fit"
+        >
+            Hello friend.
+        </p>
+
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight">
+            I am <span
+                class="text-white relative inline-block glitch-text"
+                data-text="Jagg3r">Jagg3r</span
+            >
+        </h1>
+
+        <p class="text-xl md:text-2xl text-gray-400">
+            Penetration Tester <span class="text-accent-red">/</span> Ethical Hacker
+        </p>
+
+        <div class="flex gap-6 pt-4">
+            <a
+                href="https://github.com"
+                target="_blank"
+                class="text-gray-400 hover:text-white transition-colors"
+                aria-label="GitHub"
+            >
+                <Github className="w-8 h-8" />
+            </a>
+            <a
+                href="https://linkedin.com"
+                target="_blank"
+                class="text-gray-400 hover:text-white transition-colors"
+                aria-label="LinkedIn"
+            >
+                <Linkedin className="w-8 h-8" />
+            </a>
+            <a
+                href="mailto:contact@example.com"
+                class="text-gray-400 hover:text-white transition-colors"
+                aria-label="Email"
+            >
+                <Mail className="w-8 h-8" />
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Glitch Effect */
+    .glitch-text::before,
+    .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+    }
+
+    .glitch-text::before {
+        left: 2px;
+        text-shadow: -1px 0 #b91c1c;
+        clip: rect(24px, 550px, 90px, 0);
+        animation: glitch-anim-2 3s infinite linear alternate-reverse;
+    }
+
+    .glitch-text::after {
+        left: -2px;
+        text-shadow: -1px 0 #00ffff;
+        clip: rect(85px, 550px, 140px, 0);
+        animation: glitch-anim 2.5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+        0% {
+            clip: rect(10px, 9999px, 86px, 0);
+        }
+        20% {
+            clip: rect(31px, 9999px, 12px, 0);
+        }
+        40% {
+            clip: rect(96px, 9999px, 11px, 0);
+        }
+        60% {
+            clip: rect(8px, 9999px, 20px, 0);
+        }
+        80% {
+            clip: rect(48px, 9999px, 63px, 0);
+        }
+        100% {
+            clip: rect(21px, 9999px, 78px, 0);
+        }
+    }
+
+    @keyframes glitch-anim-2 {
+        0% {
+            clip: rect(50px, 9999px, 7px, 0);
+        }
+        20% {
+            clip: rect(14px, 9999px, 133px, 0);
+        }
+        40% {
+            clip: rect(4px, 9999px, 2px, 0);
+        }
+        60% {
+            clip: rect(93px, 9999px, 83px, 0);
+        }
+        80% {
+            clip: rect(110px, 9999px, 23px, 0);
+        }
+        100% {
+            clip: rect(59px, 9999px, 9px, 0);
+        }
+    }
+</style>

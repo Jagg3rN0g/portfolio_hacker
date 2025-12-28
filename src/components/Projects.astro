@@ -1,0 +1,51 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+
+const projects = [
+    {
+        title: "CVE-2024-XXXX Exploit",
+        description:
+            "Proof of concept exploit for a critical RCE vulnerability in enterprise software. Features custom payload generation and evasion techniques.",
+        tags: ["Python", "Exploit Dev", "Network Security"],
+        stars: 124,
+        url: "#",
+    },
+    {
+        title: "AutoRecon-X",
+        description:
+            "Automated reconnaissance tool for bug bounty hunting. Integrates multiple scanners and outputs a unified report.",
+        tags: ["Bash", "Go", "Automation"],
+        stars: 89,
+        url: "#",
+    },
+    {
+        title: "Ghost-Shell",
+        description:
+            "A stealthy webshell with encrypted communication and multiple persistence mechanisms. For educational purposes only.",
+        tags: ["PHP", "Obfuscation", "WebSec"],
+        stars: 256,
+        url: "#",
+    },
+    {
+        title: "WiFi-Deauth-Tool",
+        description:
+            "ESP8266 based deauthentication tool controlled via a web interface. Includes packet sniffing capabilities.",
+        tags: ["C++", "Hardware Hacking", "WiFi"],
+        stars: 45,
+        url: "#",
+    },
+];
+---
+
+<section id="projects" class="py-20 max-w-6xl mx-auto px-4">
+    <div class="flex items-end gap-4 mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white">
+            <span class="text-accent-red">./</span>projects
+        </h2>
+        <div class="h-px bg-gray-800 flex-1 mb-2"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {projects.map((project) => <ProjectCard {...project} />)}
+    </div>
+</section>

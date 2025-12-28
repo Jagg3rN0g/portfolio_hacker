@@ -1,0 +1,55 @@
+---
+import { Youtube } from "lucide-react";
+
+const videos = [
+    {
+        title: "SQL Injection Full Course",
+        thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg", // Placeholder
+        url: "#",
+    },
+    {
+        title: "Burp Suite for Beginners",
+        thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg", // Placeholder
+        url: "#",
+    },
+];
+---
+
+<section id="youtube" class="py-20 max-w-6xl mx-auto px-4">
+    <div class="flex items-end gap-4 mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white">
+            <span class="text-accent-red">./</span>youtube_channel
+        </h2>
+        <div class="h-px bg-gray-800 flex-1 mb-2"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {
+            videos.map((video) => (
+                <a
+                    href={video.url}
+                    target="_blank"
+                    class="block group relative overflow-hidden border border-gray-800"
+                >
+                    <div class="aspect-video bg-gray-900 relative">
+                        <img
+                            src={video.thumbnail}
+                            alt={video.title}
+                            class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity"
+                        />
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="bg-red-600 p-4 rounded-full group-hover:scale-110 transition-transform">
+                                <Youtube className="w-8 h-8 text-white fill-current" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-black border-t border-gray-800">
+                        <h3 class="text-lg font-bold text-gray-200 group-hover:text-white transition-colors">
+                            {video.title}
+                        </h3>
+                    </div>
+                </a>
+            ))
+        }
+    </div>
+</section>
