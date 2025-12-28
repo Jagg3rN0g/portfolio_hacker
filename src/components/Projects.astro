@@ -1,40 +1,41 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
 
-const projects = [
-    {
-        title: "CVE-2024-XXXX Exploit",
-        description:
-            "Proof of concept exploit for a critical RCE vulnerability in enterprise software. Features custom payload generation and evasion techniques.",
-        tags: ["Python", "Exploit Dev", "Network Security"],
-        stars: 124,
-        url: "#",
-    },
-    {
-        title: "AutoRecon-X",
-        description:
-            "Automated reconnaissance tool for bug bounty hunting. Integrates multiple scanners and outputs a unified report.",
-        tags: ["Bash", "Go", "Automation"],
-        stars: 89,
-        url: "#",
-    },
-    {
-        title: "Ghost-Shell",
-        description:
-            "A stealthy webshell with encrypted communication and multiple persistence mechanisms. For educational purposes only.",
-        tags: ["PHP", "Obfuscation", "WebSec"],
-        stars: 256,
-        url: "#",
-    },
-    {
-        title: "WiFi-Deauth-Tool",
-        description:
-            "ESP8266 based deauthentication tool controlled via a web interface. Includes packet sniffing capabilities.",
-        tags: ["C++", "Hardware Hacking", "WiFi"],
-        stars: 45,
-        url: "#",
-    },
-];
+interface Repo {
+    name: string;
+    description: string;
+    stargazers_count: number;
+    html_url: string;
+    language: string;
+    fork: boolean;
+}
+
+const fetchProjects = async () => {
+    try {
+        const response = await fetch(
+            "https://api.github.com/users/jagg3rsec/repos",
+        );
+        if (!response.ok) return [];
+        const repos: Repo[] = await response.json();
+
+        return repos
+            .filter((repo) => !repo.fork) // Show only source projects
+            .sort((a, b) => b.stargazers_count - a.stargazers_count) // Sort by stars
+            .slice(0, 6) // Limit to top 6
+            .map((repo) => ({
+                title: repo.name,
+                description: repo.description || "No description available.",
+                tags: repo.language ? [repo.language] : [],
+                stars: repo.stargazers_count,
+                url: repo.html_url,
+            }));
+    } catch (e) {
+        console.error("Error fetching repos:", e);
+        return [];
+    }
+};
+
+const projects = await fetchProjects();
 ---
 
 <section id="projects" class="py-20 max-w-6xl mx-auto px-4">

@@ -1,0 +1,114 @@
+---
+import Layout from "./Layout.astro";
+import { ArrowLeft, Calendar, FileText } from "lucide-react";
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={`${frontmatter.title} | Jagg3r`}>
+    <main class="max-w-3xl mx-auto px-4 py-20">
+        <!-- Back Button -->
+        <a
+            href="/#writeups"
+            class="inline-flex items-center gap-2 text-gray-400 hover:text-accent-red transition-colors mb-8 group"
+        >
+            <ArrowLeft
+                className="w-5 h-5 group-hover:-translate-x-1 transition-transform"
+            />
+            <span class="font-mono text-sm">../back_to_root</span>
+        </a>
+
+        <!-- Header -->
+        <article class="prose prose-invert max-w-none">
+            <h1
+                class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight"
+            >
+                {frontmatter.title}
+            </h1>
+
+            <div
+                class="flex items-center gap-6 text-sm text-gray-500 font-mono mb-12 border-b border-gray-800 pb-8"
+            >
+                <div class="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-accent-red" />
+                    <span>{frontmatter.date}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <FileText className="w-4 h-4 text-accent-red" />
+                    <span>{frontmatter.platform}</span>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="text-gray-300 leading-relaxed space-y-6 font-mono">
+                <slot />
+            </div>
+        </article>
+    </main>
+</Layout>
+
+<style is:global>
+    /* Custom styling for markdown content to match the theme */
+    article h2 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-weight: 700;
+        color: white;
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    article h2::before {
+        content: "#";
+        color: var(--color-accent-red, #b91c1c);
+    }
+    article h3 {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        font-weight: 700;
+        color: #e5e5e5;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    article p {
+        margin-bottom: 1.5rem;
+    }
+    article ul {
+        list-style-type: disc;
+        list-style-position: inside;
+        margin-bottom: 1.5rem;
+        color: #d1d5db;
+    }
+    article code {
+        background-color: #111827;
+        border: 1px solid #1f2937;
+        padding: 0.125rem 0.375rem;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+        color: var(--color-accent-red, #b91c1c);
+        font-family: "Courier Prime", monospace;
+    }
+    article pre {
+        background-color: #030712;
+        border: 1px solid #1f2937;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+    }
+    article pre code {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        color: #d1d5db;
+    }
+    article blockquote {
+        border-left: 2px solid var(--color-accent-red, #b91c1c);
+        padding-left: 1rem;
+        font-style: italic;
+        color: #9ca3af;
+        margin: 1.5rem 0;
+    }
+</style>
