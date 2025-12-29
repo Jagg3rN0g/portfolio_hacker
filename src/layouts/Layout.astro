@@ -1,6 +1,7 @@
 ---
 import "@fontsource/courier-prime";
 import "../styles/global.css";
+import MatrixBackground from "../components/MatrixBackground.astro";
 
 interface Props {
     title: string;
@@ -22,6 +23,7 @@ const { title } = Astro.props;
     <body
         class="bg-black text-off-white font-mono antialiased selection:bg-accent-red selection:text-white"
     >
+        <MatrixBackground />
         <!-- Terminal-style Sticky Header -->
         <header
             class="sticky top-0 z-50 w-full bg-black/90 border-b border-white/20 backdrop-blur-sm"

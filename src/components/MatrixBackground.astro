@@ -1,0 +1,67 @@
+<canvas id="matrix-bg"></canvas>
+
+<style>
+    #matrix-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.15;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    const canvas = document.getElementById("matrix-bg") as HTMLCanvasElement;
+    const ctx = canvas.getContext("2d");
+
+    if (canvas && ctx) {
+        // Set canvas size
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        // Configuration
+        const fontSize = 14;
+        const columns = Math.ceil(canvas.width / fontSize);
+        const cuts = Array(columns).fill(0); // Vertical positions for each column
+
+        // Draw function
+        const draw = () => {
+            // Semi-transparent black fill to create trail effect
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#b91c1c"; // Classic Matrix Green, but subtle due to opacity
+            // ctx.fillStyle = "#0F0"; // Classic Matrix Green, but subtle due to opacity
+            // Alternatively reuse theme red: ctx.fillStyle = "#b91c1c";
+            // User asked for "Matrix type", usually implies green.
+            // If it clashes, I can change to theme color later.
+            // Let's stick to green for "Matrix" feel but very dark/subtle handled by opacity.
+
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < cuts.length; i++) {
+                const text = Math.random() > 0.5 ? "1" : "0";
+                const x = i * fontSize;
+                const y = cuts[i] * fontSize;
+
+                ctx.fillText(text, x, y);
+
+                // Reset drop to top randomly or if it's off screen
+                if (y > canvas.height && Math.random() > 0.975) {
+                    cuts[i] = 0;
+                }
+
+                cuts[i]++;
+            }
+        };
+
+        setInterval(draw, 50);
+    }
+</script>

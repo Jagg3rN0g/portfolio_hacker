@@ -140,7 +140,7 @@ import { Github, Linkedin, Mail, Youtube } from "lucide-react";
     const element = document.getElementById("hero-name");
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
 
-    function scrambleText(targetText) {
+    function scrambleText(targetText: string) {
         if (!element) return;
 
         let iterations = 0;
