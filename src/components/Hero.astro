@@ -137,47 +137,41 @@ import { Github, Linkedin, Mail, Youtube } from "lucide-react";
 <script>
     const names = ["Jagg3r", "Hacker"];
     let arrayIndex = 0;
-    let charIndex = names[0].length;
-    let isDeleting = false;
     const element = document.getElementById("hero-name");
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
 
-    function type() {
+    function scrambleText(targetText) {
         if (!element) return;
 
-        const currentName = names[arrayIndex];
+        let iterations = 0;
+        const interval = setInterval(() => {
+            element.textContent = targetText
+                .split("")
+                .map((letter, index) => {
+                    if (index < iterations) {
+                        return targetText[index];
+                    }
+                    return chars[Math.floor(Math.random() * chars.length)];
+                })
+                .join("");
 
-        if (isDeleting) {
-            charIndex--;
-            if (charIndex < 0) charIndex = 0;
-        } else {
-            charIndex++;
-            if (charIndex > currentName.length) charIndex = currentName.length;
-        }
+            if (iterations >= targetText.length) {
+                clearInterval(interval);
+                element.setAttribute("data-text", targetText);
+            }
 
-        const displayedText = currentName.substring(0, charIndex);
-        element.textContent = displayedText;
-        element.setAttribute("data-text", displayedText);
-
-        let typeSpeed = 150;
-
-        if (isDeleting) {
-            typeSpeed /= 2;
-        }
-
-        if (!isDeleting && charIndex === currentName.length) {
-            typeSpeed = 2000; // Pause at end
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            arrayIndex = (arrayIndex + 1) % names.length;
-            typeSpeed = 500; // Pause before typing next
-        }
-
-        setTimeout(type, typeSpeed);
+            iterations += 1 / 3;
+        }, 30);
     }
 
-    // Initialize
+    // Start the loop
     if (element) {
-        setTimeout(type, 1000);
+        // Initial delay
+        setTimeout(() => {
+            setInterval(() => {
+                arrayIndex = (arrayIndex + 1) % names.length;
+                scrambleText(names[arrayIndex]);
+            }, 3000);
+        }, 1000);
     }
 </script>
